@@ -1,11 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 type FormType = 'intake' | 'audit'
 
-export default function ContactPage() {
+function ContactForm() {
+  const searchParams = useSearchParams()
   const [formType, setFormType] = useState<FormType>('intake')
+
+  useEffect(() => {
+    if (searchParams.get('type') === 'audit') setFormType('audit')
+  }, [searchParams])
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -234,5 +240,13 @@ export default function ContactPage() {
         </form>
       </section>
     </>
+  )
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense>
+      <ContactForm />
+    </Suspense>
   )
 }
