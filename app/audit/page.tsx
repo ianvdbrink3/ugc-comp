@@ -30,7 +30,7 @@ export default function AuditPage() {
             Geen algemeen advies. Geen freelancer die je een whitepaper stuurt.
             Een concrete analyse van jouw merk, jouw product, jouw kansen op TikTok Shop NL.
           </p>
-          <Link href="/contact" className="btn-primary text-lg px-10 py-4">
+          <Link href="/contact?type=audit" className="btn-primary text-lg px-10 py-4">
             Boek nu voor €297
           </Link>
           <p className="text-muted text-sm mt-4">
@@ -153,7 +153,7 @@ export default function AuditPage() {
           <p className="text-muted text-sm mb-10">
             TikTok Shop NL lanceert 15 juni 2026. Er zijn nu nog auditplekken beschikbaar.
           </p>
-          <Link href="/contact" className="btn-primary text-lg px-10 py-4">
+          <Link href="/contact?type=audit" className="btn-primary text-lg px-10 py-4">
             Boek audit voor €297
           </Link>
           <p className="text-muted text-xs mt-4">

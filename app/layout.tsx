@@ -11,15 +11,29 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "AI UGC Studio — TikTok-native video's voor e-commercemerken",
+  title: {
+    default: "AI UGC Studio — TikTok-native video's voor e-commercemerken",
+    template: '%s — AI UGC Studio',
+  },
   description:
     "Wij maken AI-gegenereerde UGC video's voor Nederlandse TikTok Shop merken. Schaalbaar, EU AI Act compliant, klaar voor TikTok Shop NL. Vanaf €1.000/maand.",
-  keywords: ['AI UGC', 'TikTok Shop', 'UGC studio', 'TikTok content', 'e-commerce video', 'Nederland'],
+  keywords: ['AI UGC', 'TikTok Shop NL', 'UGC studio Nederland', 'TikTok content', 'e-commerce video', 'AI video marketing'],
+  metadataBase: new URL('https://aiugcstudio.nl'),
+  alternates: { canonical: '/' },
   openGraph: {
     title: "AI UGC Studio — TikTok-native video's voor e-commercemerken",
     description: 'Schaalbare AI UGC voor TikTok Shop NL. Geen acteurs. Geen gedoe.',
+    url: 'https://aiugcstudio.nl',
+    siteName: 'AI UGC Studio',
+    locale: 'nl_NL',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: "AI UGC Studio — TikTok-native video's",
+    description: 'Schaalbare AI UGC voor TikTok Shop NL. Vanaf €1.000/maand.',
+  },
+  robots: { index: true, follow: true },
 }
 
 export default function RootLayout({
