@@ -7,7 +7,7 @@ import { useForm, ValidationError } from '@formspree/react'
 type FormType = 'intake' | 'audit'
 
 const inputClass =
-  'w-full bg-surface border border-border rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-accent transition-colors duration-200'
+  'w-full bg-surface border border-border rounded-xl px-4 py-3 text-sm text-neutral-900 placeholder-neutral-600 focus:outline-none focus:border-accent transition-colors duration-200'
 
 const errorClass = 'text-red-400 text-xs mt-1'
 
@@ -30,7 +30,7 @@ function ContactForm() {
         </div>
         <h1 className="text-3xl font-black mb-4">Ontvangen!</h1>
         <p className="text-neutral-400 mb-2">
-          We nemen binnen <span className="text-white font-semibold">24 uur</span> contact op.
+          We nemen binnen <span className="text-neutral-900 font-semibold">24 uur</span> contact op.
         </p>
         <p className="text-neutral-600 text-sm">
           Check ook je spam-folder voor de bevestiging.
@@ -59,7 +59,7 @@ function ContactForm() {
             type="button"
             onClick={() => setFormType('intake')}
             className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-              formType === 'intake' ? 'bg-accent text-background' : 'text-neutral-400 hover:text-white'
+              formType === 'intake' ? 'bg-accent text-background' : 'text-neutral-400 hover:text-neutral-900'
             }`}
           >
             Gratis intake
@@ -68,7 +68,7 @@ function ContactForm() {
             type="button"
             onClick={() => setFormType('audit')}
             className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-              formType === 'audit' ? 'bg-accent text-background' : 'text-neutral-400 hover:text-white'
+              formType === 'audit' ? 'bg-accent text-background' : 'text-neutral-400 hover:text-neutral-900'
             }`}
           >
             Betaalde audit (€297)

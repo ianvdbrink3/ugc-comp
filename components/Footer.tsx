@@ -11,7 +11,7 @@ export default function Footer() {
               <div className="w-7 h-7 rounded-md bg-accent flex items-center justify-center">
                 <span className="text-background font-black text-sm">U</span>
               </div>
-              <span className="font-bold text-white text-sm tracking-tight">
+              <span className="font-bold text-neutral-900 text-sm tracking-tight">
                 AI UGC <span className="text-accent">Studio</span>
               </span>
             </div>
@@ -28,7 +28,7 @@ export default function Footer() {
 
           {/* Links */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Navigatie</h4>
+            <h4 className="text-neutral-900 font-semibold text-sm mb-4">Navigatie</h4>
             <ul className="space-y-2.5">
               {[
                 { href: '/', label: 'Home' },
@@ -40,7 +40,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-muted text-sm hover:text-white transition-colors duration-200"
+                    className="text-muted text-sm hover:text-neutral-900 transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -51,12 +51,12 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Contact</h4>
+            <h4 className="text-neutral-900 font-semibold text-sm mb-4">Contact</h4>
             <ul className="space-y-2.5">
               <li>
                 <a
                   href="mailto:iandepian@gmail.com"
-                  className="text-muted text-sm hover:text-white transition-colors duration-200"
+                  className="text-muted text-sm hover:text-neutral-900 transition-colors duration-200"
                 >
                   iandepian@gmail.com
                 </a>
@@ -66,7 +66,7 @@ export default function Footer() {
                   href="https://tiktok.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted text-sm hover:text-white transition-colors duration-200"
+                  className="text-muted text-sm hover:text-neutral-900 transition-colors duration-200"
                 >
                   TikTok
                 </a>
@@ -76,7 +76,7 @@ export default function Footer() {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted text-sm hover:text-white transition-colors duration-200"
+                  className="text-muted text-sm hover:text-neutral-900 transition-colors duration-200"
                 >
                   Instagram
                 </a>
@@ -91,10 +91,10 @@ export default function Footer() {
             © {new Date().getFullYear()} AI UGC Studio. Alle rechten voorbehouden.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="text-muted text-xs hover:text-white transition-colors duration-200">
+            <Link href="/privacy" className="text-muted text-xs hover:text-neutral-900 transition-colors duration-200">
               Privacybeleid
             </Link>
-            <Link href="/algemene-voorwaarden" className="text-muted text-xs hover:text-white transition-colors duration-200">
+            <Link href="/algemene-voorwaarden" className="text-muted text-xs hover:text-neutral-900 transition-colors duration-200">
               Algemene voorwaarden
             </Link>
           </div>

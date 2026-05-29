@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #0A0A0A;
-  --surface: #141414;
-  --surface-2: #1E1E1E;
-  --accent: #00FF88;
-  --accent-dim: #00CC6A;
-  --muted: #6B6B6B;
-  --border: #2A2A2A;
+  --background: #FFFFFF;
+  --surface: #F5F5F5;
+  --surface-2: #EBEBEB;
+  --accent: #00C46A;
+  --accent-dim: #00A558;
+  --muted: #777777;
+  --border: #E2E2E2;
 }
 
 * {
@@ -24,7 +24,7 @@ html {
 
 body {
   background-color: var(--background);
-  color: #ffffff;
+  color: #111111;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -36,7 +36,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: var(--surface);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -56,8 +56,8 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(0, 255, 136, 0.2);
-  color: #fff;
+  background: rgba(0, 196, 106, 0.2);
+  color: #111;
 }
 
 @layer components {
@@ -66,7 +66,7 @@ body {
   }
 
   .btn-secondary {
-    @apply border border-border text-white font-semibold px-6 py-3 rounded-lg hover:border-white transition-colors duration-200 inline-block text-center;
+    @apply border border-border text-neutral-800 font-semibold px-6 py-3 rounded-lg hover:border-neutral-800 transition-colors duration-200 inline-block text-center;
   }
 
   .card {
@@ -78,6 +78,6 @@ body {
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neutral-900 to-neutral-500;
   }
 }

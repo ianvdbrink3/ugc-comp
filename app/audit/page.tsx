@@ -130,7 +130,7 @@ export default function AuditPage() {
               &ldquo;Na de audit wisten we precies welke hooks we moesten testen. Binnen twee weken hadden we onze eerste TikTok-video met 80K views. De audit betaalde zichzelf in de eerste week terug.&rdquo;
             </blockquote>
             <div className="text-muted text-sm">
-              <span className="font-semibold text-white">Sophie de Vries</span>
+              <span className="font-semibold text-neutral-900">Sophie de Vries</span>
               {' · '}
               <span>Oprichtster, Skin Lab NL</span>
               {' · '}

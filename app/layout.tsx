@@ -43,7 +43,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="nl" className={inter.variable}>
-      <body className="bg-background text-white font-sans">
+      <body className="bg-background text-neutral-900 font-sans">
         <Nav />
         <main>{children}</main>
         <Footer />

@@ -12,7 +12,7 @@ export default function AlgemeneVoorwaardenPage() {
 
       <div className="space-y-8 text-neutral-300 text-sm leading-relaxed">
         <div>
-          <h2 className="text-white font-bold text-base mb-3">Artikel 1 — Definities</h2>
+          <h2 className="text-neutral-900 font-bold text-base mb-3">Artikel 1 — Definities</h2>
           <p>
             &quot;AI UGC Studio&quot;: de eenmanszaak die diensten levert op het gebied van AI-gegenereerde
             UGC-content voor e-commercemerken. &quot;Opdrachtgever&quot;: de onderneming die een overeenkomst
@@ -21,7 +21,7 @@ export default function AlgemeneVoorwaardenPage() {
         </div>
 
         <div>
-          <h2 className="text-white font-bold text-base mb-3">Artikel 2 — Toepasselijkheid</h2>
+          <h2 className="text-neutral-900 font-bold text-base mb-3">Artikel 2 — Toepasselijkheid</h2>
           <p>
             Deze voorwaarden zijn van toepassing op alle aanbiedingen, opdrachten en overeenkomsten
             tussen AI UGC Studio en de Opdrachtgever. Afwijkingen zijn alleen geldig indien schriftelijk
@@ -30,7 +30,7 @@ export default function AlgemeneVoorwaardenPage() {
         </div>
 
         <div>
-          <h2 className="text-white font-bold text-base mb-3">Artikel 3 — Aanbod & Overeenkomst</h2>
+          <h2 className="text-neutral-900 font-bold text-base mb-3">Artikel 3 — Aanbod & Overeenkomst</h2>
           <p>
             Alle aanbiedingen zijn vrijblijvend tenzij een acceptatietermijn is vermeld. Een overeenkomst
             komt tot stand na schriftelijke bevestiging (e-mail volstaat) door AI UGC Studio.
@@ -38,7 +38,7 @@ export default function AlgemeneVoorwaardenPage() {
         </div>
 
         <div>
-          <h2 className="text-white font-bold text-base mb-3">Artikel 4 — Levering</h2>
+          <h2 className="text-neutral-900 font-bold text-base mb-3">Artikel 4 — Levering</h2>
           <p>
             Levering van de eerste batch vindt plaats binnen 7 werkdagen na ontvangst van de ingevulde
             brief en goedkeuring van de concepten. Bij de Launch Sprint geldt de overeengekomen 30-dagentermijn.
@@ -47,7 +47,7 @@ export default function AlgemeneVoorwaardenPage() {
         </div>
 
         <div>
-          <h2 className="text-white font-bold text-base mb-3">Artikel 5 — Eigendom & Licentie</h2>
+          <h2 className="text-neutral-900 font-bold text-base mb-3">Artikel 5 — Eigendom & Licentie</h2>
           <p>
             Na volledige betaling draagt AI UGC Studio alle eigendomsrechten op de geleverde Content over
             aan de Opdrachtgever. De Opdrachtgever mag de Content onbeperkt gebruiken op alle platforms.
@@ -57,7 +57,7 @@ export default function AlgemeneVoorwaardenPage() {
         </div>
 
         <div>
-          <h2 className="text-white font-bold text-base mb-3">Artikel 6 — Betaling</h2>
+          <h2 className="text-neutral-900 font-bold text-base mb-3">Artikel 6 — Betaling</h2>
           <p>
             Betaling dient te geschieden binnen 14 dagen na factuurdatum. Bij maandelijkse pakketten
             wordt vooraf per maand gefactureerd. Bij niet-tijdige betaling is AI UGC Studio gerechtigd
@@ -66,7 +66,7 @@ export default function AlgemeneVoorwaardenPage() {
         </div>
 
         <div>
-          <h2 className="text-white font-bold text-base mb-3">Artikel 7 — Opzegging</h2>
+          <h2 className="text-neutral-900 font-bold text-base mb-3">Artikel 7 — Opzegging</h2>
           <p>
             Maandelijkse pakketten zijn opzegbaar per e-mail met inachtneming van een opzegtermijn van
             één kalendermaand. De betaalde audit (€297) is niet restitueerbaar na aanvang van de werkzaamheden.
@@ -74,7 +74,7 @@ export default function AlgemeneVoorwaardenPage() {
         </div>
 
         <div>
-          <h2 className="text-white font-bold text-base mb-3">Artikel 8 — Aansprakelijkheid</h2>
+          <h2 className="text-neutral-900 font-bold text-base mb-3">Artikel 8 — Aansprakelijkheid</h2>
           <p>
             AI UGC Studio is niet aansprakelijk voor indirecte schade, gevolgschade of gederfde winst.
             De aansprakelijkheid is in alle gevallen beperkt tot het bedrag dat de Opdrachtgever in de
@@ -83,7 +83,7 @@ export default function AlgemeneVoorwaardenPage() {
         </div>
 
         <div>
-          <h2 className="text-white font-bold text-base mb-3">Artikel 9 — Klachten</h2>
+          <h2 className="text-neutral-900 font-bold text-base mb-3">Artikel 9 — Klachten</h2>
           <p>
             Klachten dienen binnen 7 werkdagen na levering schriftelijk te worden gemeld via
             {' '}<a href="mailto:iandepian@gmail.com" className="text-accent hover:underline">iandepian@gmail.com</a>.
@@ -92,7 +92,7 @@ export default function AlgemeneVoorwaardenPage() {
         </div>
 
         <div>
-          <h2 className="text-white font-bold text-base mb-3">Artikel 10 — Toepasselijk recht</h2>
+          <h2 className="text-neutral-900 font-bold text-base mb-3">Artikel 10 — Toepasselijk recht</h2>
           <p>
             Op alle overeenkomsten is Nederlands recht van toepassing. Geschillen worden voorgelegd aan
             de bevoegde rechter in Nederland.

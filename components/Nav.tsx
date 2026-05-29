@@ -24,7 +24,7 @@ export default function Nav() {
             <div className="w-7 h-7 rounded-md bg-accent flex items-center justify-center">
               <span className="text-background font-black text-sm">U</span>
             </div>
-            <span className="font-bold text-white text-sm tracking-tight">
+            <span className="font-bold text-neutral-900 text-sm tracking-tight">
               AI UGC <span className="text-accent">Studio</span>
             </span>
           </Link>
@@ -38,7 +38,7 @@ export default function Nav() {
                 className={`text-sm font-medium transition-colors duration-200 ${
                   pathname === link.href
                     ? 'text-accent'
-                    : 'text-neutral-400 hover:text-white'
+                    : 'text-neutral-500 hover:text-neutral-900'
                 }`}
               >
                 {link.label}
@@ -60,7 +60,7 @@ export default function Nav() {
             aria-label="Menu openen"
           >
             <span
-              className={`block w-5 h-0.5 bg-white transition-transform duration-200 ${
+              className={`block w-5 h-0.5 bg-neutral-800 transition-transform duration-200 ${
                 menuOpen ? 'translate-y-2 rotate-45' : ''
               }`}
             />
@@ -70,7 +70,7 @@ export default function Nav() {
               }`}
             />
             <span
-              className={`block w-5 h-0.5 bg-white transition-transform duration-200 ${
+              className={`block w-5 h-0.5 bg-neutral-800 transition-transform duration-200 ${
                 menuOpen ? '-translate-y-2 -rotate-45' : ''
               }`}
             />
@@ -88,7 +88,7 @@ export default function Nav() {
                 className={`block text-sm font-medium px-2 py-1.5 rounded transition-colors duration-200 ${
                   pathname === link.href
                     ? 'text-accent'
-                    : 'text-neutral-400 hover:text-white'
+                    : 'text-neutral-500 hover:text-neutral-900'
                 }`}
               >
                 {link.label}

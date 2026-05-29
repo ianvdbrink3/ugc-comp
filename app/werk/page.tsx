@@ -81,7 +81,7 @@ export default function WerkPage() {
               className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
                 active === f.value
                   ? 'bg-accent text-background border-accent'
-                  : 'border-border text-neutral-400 hover:text-white hover:border-neutral-500'
+                  : 'border-border text-neutral-400 hover:text-neutral-900 hover:border-neutral-500'
               }`}
             >
               {f.label}
