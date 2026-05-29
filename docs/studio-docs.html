@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI UGC Studio — Business Docs</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1c1c1c;
+    --border: #2a2a2a;
+    --accent: #00ff88;
+    --accent-dim: rgba(0,255,136,0.12);
+    --text: #e8e8e8;
+    --muted: #888;
+    --orange: #ff8c42;
+    --blue: #4da6ff;
+    --purple: #c084fc;
+    --red: #ff6b6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── Sidebar nav ── */
+  .layout { display: flex; min-height: 100vh; }
+  .sidebar {
+    width: 240px;
+    min-width: 240px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 28px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar-brand {
+    padding: 0 20px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .sidebar-brand .logo {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .sidebar-brand .sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .nav-section {
+    padding: 0 12px;
+    margin-bottom: 8px;
+  }
+  .nav-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 8px;
+    margin-bottom: 4px;
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: 6px;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  .nav-link:hover, .nav-link.active {
+    background: var(--accent-dim);
+    color: var(--accent);
+  }
+  .nav-link .icon { font-size: 15px; width: 20px; text-align: center; }
+
+  /* ── Main content ── */
+  .main { flex: 1; padding: 40px 48px; max-width: 900px; }
+
+  /* ── Section / page ── */
+  .doc-section { display: none; }
+  .doc-section.active { display: block; }
+
+  /* ── Page header ── */
+  .page-header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,255,136,0.25);
+    border-radius: 4px;
+    padding: 3px 8px;
+    margin-bottom: 12px;
+  }
+  .page-title { font-size: 28px; font-weight: 700; color: #fff; line-height: 1.2; }
+  .page-desc { color: var(--muted); margin-top: 8px; font-size: 14px; }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .card-icon { font-size: 20px; }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-subtitle { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+  /* ── Typography ── */
+  h2 { font-size: 20px; font-weight: 700; color: #fff; margin: 28px 0 12px; }
+  h3 { font-size: 16px; font-weight: 600; color: #ddd; margin: 20px 0 8px; }
+  h4 { font-size: 14px; font-weight: 600; color: var(--accent); margin: 16px 0 8px; }
+  p { margin-bottom: 12px; color: var(--text); }
+  strong { color: #fff; font-weight: 600; }
+
+  /* ── Timeline for Loom ── */
+  .timeline { display: flex; flex-direction: column; gap: 16px; }
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .timeline-time {
+    min-width: 90px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-radius: 6px;
+    padding: 4px 8px;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .timeline-content { flex: 1; }
+  .timeline-content h4 { margin: 0 0 6px; color: #fff; }
+  .timeline-content p { margin: 0; font-size: 14px; color: #bbb; }
+
+  /* ── Quote blocks ── */
+  .quote-block {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 14px;
+    color: #ccc;
+    font-style: italic;
+  }
+
+  /* ── Code/copy blocks ── */
+  .copy-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 12px 0;
+    position: relative;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #c9d1d9;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { background: var(--accent-dim); color: var(--accent); border-color: rgba(0,255,136,0.3); }
+  .copy-btn.copied { color: var(--accent); }
+
+  /* ── Tables ── */
+  .table-wrap { overflow-x: auto; margin: 12px 0 20px; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { background: var(--surface2); }
+  th { padding: 10px 14px; text-align: left; font-weight: 600; color: #aaa; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: #ccc; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ── Checklist ── */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 14px;
+    color: #ccc;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    margin-top: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    transition: all 0.15s;
+  }
+  .check-box.checked {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+  }
+
+  /* ── Input fields ── */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .form-group input, .form-group textarea, .form-group select {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    border-color: rgba(0,255,136,0.4);
+  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-full { grid-column: 1 / -1; }
+
+  /* ── Badges / tags ── */
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+  .badge-hot { background: rgba(255,107,107,0.15); color: var(--red); border: 1px solid rgba(255,107,107,0.25); }
+  .badge-warm { background: rgba(255,140,66,0.15); color: var(--orange); border: 1px solid rgba(255,140,66,0.25); }
+  .badge-cold { background: rgba(77,166,255,0.15); color: var(--blue); border: 1px solid rgba(77,166,255,0.25); }
+  .badge-retainer { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(0,255,136,0.25); }
+
+  /* ── Tips / callout ── */
+  .callout {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 18px; margin-top: 1px; }
+  .callout p { margin: 0; color: #bbb; }
+  .callout.accent { border-color: rgba(0,255,136,0.2); background: var(--accent-dim); }
+  .callout.accent p { color: #9fffd0; }
+
+  /* ── Stats row ── */
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+  .stat-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-num { font-size: 28px; font-weight: 800; color: var(--accent); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── Divider ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+  /* ── Phase steps ── */
+  .phase-grid { display: flex; flex-direction: column; gap: 12px; }
+  .phase-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .phase-num {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    border: 2px solid rgba(0,255,136,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .phase-content h4 { margin: 0 0 4px; color: #fff; font-size: 15px; }
+  .phase-content p { margin: 0; font-size: 13px; color: var(--muted); }
+
+  /* ── Email template card ── */
+  .email-card {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .email-header {
+    background: var(--surface2);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .email-header .subject { font-size: 13px; font-weight: 600; color: #ddd; }
+  .email-body { padding: 20px; font-size: 14px; line-height: 1.8; color: #c9d1d9; white-space: pre-wrap; }
+
+  /* ── Tracker table with interactive rows ── */
+  .tracker-row td { cursor: default; }
+  .tracker-row input[type="text"] {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 13px;
+    width: 100%;
+    outline: none;
+    font-family: inherit;
+  }
+  .tracker-row input[type="text"]:focus { color: #fff; }
+  .tracker-row select {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 13px;
+    outline: none;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 24px 20px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ── Sidebar ── -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo">AI UGC Studio</div>
+      <div class="sub">Business Docs — iandepian@gmail.com</div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Outreach</div>
+      <a class="nav-link active" onclick="show('loom')">
+        <span class="icon">🎬</span> Loom Audit Script
+      </a>
+      <a class="nav-link" onclick="show('emails')">
+        <span class="icon">📧</span> Email Templates
+      </a>
+      <a class="nav-link" onclick="show('tracker')">
+        <span class="icon">📊</span> Prospect Tracker
+      </a>
+    </div>
+
+    <div class="nav-section" style="margin-top:8px;">
+      <div class="nav-label">Klanten</div>
+      <a class="nav-link" onclick="show('brief')">
+        <span class="icon">📋</span> Onboarding Brief
+      </a>
+      <a class="nav-link" onclick="show('review')">
+        <span class="icon">📈</span> Performance Review
+      </a>
+      <a class="nav-link" onclick="show('workflow')">
+        <span class="icon">⚙️</span> Productie Workflow
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Main ── -->
+  <main class="main">
+
+    <!-- ════════════════════════════ LOOM ════════════════════════════ -->
+    <div class="doc-section active" id="section-loom">
+      <div class="page-header">
+        <div class="page-tag">🎬 Outreach</div>
+        <h1 class="page-title">Loom Audit Script</h1>
+        <p class="page-desc">2-minuten schermopname per prospect. Geen slides, gewoon scherm + gezichtscamera.</p>
+      </div>
+
+      <div class="callout accent">
+        <div class="callout-icon">💡</div>
+        <p><strong>Voor je begint:</strong> Open het TikTok-profiel of Meta Ad Library van het merk. Noem de merknaam minstens 2× tijdens de opname. Doel: onder de 2:10 blijven.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-time">[0:00 — 0:10]</div>
+          <div class="timeline-content">
+            <h4>Opening</h4>
+            <div class="quote-block">"Hé [NAAM], ik ben Ian — ik maak AI-gegenereerde UGC voor TikTok Shop merken. Ik keek even naar jullie content bij [MERKNAAM] en ik wil je in 2 minuten laten zien wat ik zie."</div>
+            <p style="font-size:13px;color:var(--muted);">Zet cursor op hun TikTok-pagina of Meta Ad Library.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">[0:10 — 0:45]</div>
+          <div class="timeline-content">
+            <h4>Analyse van huidige content</h4>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">Kies 1–2 concrete zwakke punten:</p>
+            <div class="quote-block"><strong>A — Statisch:</strong> "Ik zie dat jullie posts voornamelijk stilstaande productfoto's zijn. Op TikTok stopt niemand bij een statisch beeld — de eerste 2 seconden moeten beweging hebben."</div>
+            <div class="quote-block"><strong>B — Geen hook:</strong> "De video's beginnen met het logo of productnaam. Maar op TikTok heeft een kijker al gescrolld vóórdat jij je merk hebt genoemd. Je hebt 1.5 seconde om te stoppen."</div>
+            <div class="quote-block"><strong>C — Te weinig volume:</strong> "Jullie posten 2–3 keer per week. Op TikTok Shop is het een volumespel. Merken die 15–20 video's per maand testen vinden hun winnende hook 4x sneller."</div>
+            <div class="quote-block"><strong>D — Te gelikt:</strong> "De content heeft een gelikte productie-look. Op TikTok converteert 'shot-on-iPhone-gevoel' beter. Mensen scrollen weg als het te gelikt is."</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">[0:45 — 1:30]</div>
+          <div class="timeline-content">
+            <h4>3 concrete hoeken noemen</h4>
+            <div class="quote-block">"Hier zijn 3 hooks die ik zou maken voor [PRODUCT], gebaseerd op wat ik zie werken in [NICHE]:"</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+              <div class="card" style="padding:12px 16px;margin:0;">
+                <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">Hook 1 — Nieuwsgierigheid</span>
+                <p style="margin:4px 0 0;font-size:14px;">"Ik was [X] jaar oud toen ik eindelijk begreep dat [PRODUCTCLAIM]"</p>
+              </div>
+              <div class="card" style="padding:12px 16px;margin:0;">
+                <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">Hook 2 — Stopper</span>
+                <p style="margin:4px 0 0;font-size:14px;">"Stop scrollend als je ooit [PIJN VAN DOELGROEP] hebt gehad"</p>
+              </div>
+              <div class="card" style="padding:12px 16px;margin:0;">
+                <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;">Hook 3 — Vergelijking</span>
+                <p style="margin:4px 0 0;font-size:14px;">"Dit product van €[PRIJS] verving mijn routine van €[HOGERE PRIJS]"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">[1:30 — 1:50]</div>
+          <div class="timeline-content">
+            <h4>Resultaat schetsen</h4>
+            <div class="quote-block">"Als we deze drie testen met een vaste AI-persona in jouw niche, weten jullie binnen 2 weken welke hook converteert op TikTok Shop NL."</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">[1:50 — 2:00]</div>
+          <div class="timeline-content">
+            <h4>CTA</h4>
+            <div class="quote-block">"Ik produceer de eerste 5 video's gratis. Presteren ze, praten we over een retainer. Presteren ze niet — je hebt niks betaald en je hebt wel data.<br><br>Eén reply is genoeg. Ik stuur je dezelfde dag de brief."</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h2>Tips</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tip</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Merknaam</strong></td><td>Noem de merknaam minstens 2× — maakt het persoonlijk, niet massaal</td></tr>
+            <tr><td><strong>Duur</strong></td><td>Oefen tot je onder de 2:10 blijft. Boven de 2:30 daalt open-rate fors</td></tr>
+            <tr><td><strong>Opzet</strong></td><td>Geen slides — scherm + gezichtscamera (klein, rechtsboven)</td></tr>
+            <tr><td><strong>Volume</strong></td><td>Stuur 10 per week, reken op 10–20% respons</td></tr>
+            <tr><td><strong>Timing</strong></td><td>Dinsdag/woensdag ochtend 9:00–11:00 NL scoort het beste</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Follow-up email (na 3 dagen geen reactie)</h2>
+      <div class="email-card">
+        <div class="email-header">
+          <span class="subject">Onderwerp: 3 ideeën voor [MERK] op TikTok Shop</span>
+          <button class="copy-btn" onclick="copyEmail(this)">Kopieer</button>
+        </div>
+        <div class="email-body">Hoi [naam],
+
+Stuurde je vorige week een korte video met 3 UGC-concepten voor jullie content: [loom-link]
+
+Samenvatting in 1 zin: jullie content heeft de juiste producten maar mist de hook die iemand laat stoppen op TikTok Shop.
+
+Eerste 5 video's maak ik gratis. Eén reply is genoeg.
+
+Ian
+AI UGC Studio</div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════ EMAILS ════════════════════════════ -->
+    <div class="doc-section" id="section-emails">
+      <div class="page-header">
+        <div class="page-tag">📧 Outreach</div>
+        <h1 class="page-title">Email Templates</h1>
+        <p class="page-desc">3 kant-en-klare templates. Kopieer, pas de merknaam aan, verstuur.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num">10–20%</div>
+          <div class="stat-label">Loom → Reactie</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">~50%</div>
+          <div class="stat-label">Reactie → Pilot</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">~70%</div>
+          <div class="stat-label">Pilot → Retainer</div>
+        </div>
+      </div>
+
+      <h2>VERSION A — Gratis Pilot (5 video's)</h2>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:12px;">Voor prospects die gereageerd hebben op je Loom, of warme introducties.</p>
+      <div class="email-card">
+        <div class="email-header">
+          <span class="subject">Onderwerp: 5 gratis video's voor [MERKNAAM] — geen verplichtingen</span>
+          <button class="copy-btn" onclick="copyEmail(this)">Kopieer</button>
+        </div>
+        <div class="email-body">Hoi [naam],
+
+Goed gesprek / bedankt voor je reactie.
+
+Zoals beloofd: ik maak de eerste 5 video's voor jullie gratis.
+Geen contract, geen automatische verlenging. Gewoon 5 video's — dan kijken we samen naar de data.
+
+Wat ik nodig heb:
+→ De onboarding brief invullen (10 min): [LINK NAAR BRIEF]
+→ Jouw goedkeuring op de 3 hook-concepten die ik voorstel
+→ Dan begin ik — eerste batch binnen 7 werkdagen
+
+De enige verwachting van mijn kant: als de video's presteren, plannen we een gesprek over een retainer.
+Presteren ze niet — je hebt niks betaald, en je hebt wel data over wat werkt op TikTok Shop NL.
+
+Klinkt goed?
+
+Ian
+AI UGC Studio
+iandepian@gmail.com</div>
+      </div>
+
+      <h2>VERSION B — Betaalde Audit (€297)</h2>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:12px;">Voor prospects die interesse toonden maar niet direct JA zeggen op een pilot. Of om budget te valideren vóór gratis werk.</p>
+      <div class="email-card">
+        <div class="email-header">
+          <span class="subject">Onderwerp: Concreet advies voor [MERKNAAM] op TikTok — €297</span>
+          <button class="copy-btn" onclick="copyEmail(this)">Kopieer</button>
+        </div>
+        <div class="email-body">Hoi [naam],
+
+Niet zeker of jullie content klaar is voor TikTok Shop NL?
+
+Ik doe een betaalde audit voor €297. Je krijgt:
+- 30-min strategie-call
+- 3 kant-en-klare hook-concepten voor [PRODUCT]
+- Adviesrapport: wat jullie content mist + wat converteert in jullie niche
+
+Bedrag wordt volledig verrekend als je daarna een pakket afneemt.
+
+Interesse? Dan plan ik direct een moment in.
+
+Ian
+AI UGC Studio
+iandepian@gmail.com</div>
+      </div>
+
+      <h2>VERSION C — Opvolging (dag 5–7)</h2>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:12px;">Follow-up op Loom of eerdere e-mail zonder reactie.</p>
+      <div class="email-card">
+        <div class="email-header">
+          <span class="subject">Onderwerp: Re: [vorige onderwerpregel]</span>
+          <button class="copy-btn" onclick="copyEmail(this)">Kopieer</button>
+        </div>
+        <div class="email-body">Hoi [naam],
+
+Korte opvolging — stuurde je vorige week de Loom met 3 concepten voor [MERKNAAM].
+
+Nog steeds beschikbaar als je wilt sparren over TikTok Shop NL.
+TikTok lanceert 15 juni — de eerste 90 dagen zijn 2% commissie, daarna 9%.
+Wie nú volume opbouwt, heeft een structureel voordeel.
+
+Eén reply is genoeg.
+
+Ian</div>
+      </div>
+
+      <hr class="divider">
+      <h2>Weekplanning outreach</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Week</th><th>Actie</th><th>Doel</th></tr></thead>
+          <tbody>
+            <tr><td>Week 1</td><td>10 Looms + versie A/B emails</td><td>Pijplijn vullen</td></tr>
+            <tr><td>Week 2</td><td>Follow-up versie C op non-responders</td><td>Respons verhogen</td></tr>
+            <tr><td>Week 3</td><td>10 nieuwe Looms</td><td>Doorlopende instroom</td></tr>
+            <tr><td>Week 4</td><td>Evalueer: wie is klaar voor pilot?</td><td>Focus op top 2–3 leads</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <div class="callout-icon">⚠️</div>
+        <p><strong>DO NOT:</strong> lange pitches (max 5 zinnen) · CC zonder toestemming · fake urgentie ("Nog maar 2 plekken!") · meer dan 3 follow-ups zonder reactie</p>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════ TRACKER ════════════════════════════ -->
+    <div class="doc-section" id="section-tracker">
+      <div class="page-header">
+        <div class="page-tag">📊 Outreach</div>
+        <h1 class="page-title">Prospect Tracker</h1>
+        <p class="page-desc">Doel: 10 prospects per week toevoegen, 10 Looms per week versturen. Klik op een cel om te bewerken.</p>
+      </div>
+
+      <div class="callout accent">
+        <div class="callout-icon">🎯</div>
+        <p>Focus week 1–2 op <strong>Beauty</strong>. Hoogste organische conversie op TikTok + meest DTC-merken met zwakke TikTok-aanwezigheid. Daarna: Supplementen → Gadget → Fashion.</p>
+      </div>
+
+      <h2>Hoe prospects vinden</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Bron</th><th>Methode</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Meta Ad Library</strong></td><td>Zoek niche + NL → filter "Active ads" → kijk wie veel video-ads heeft</td></tr>
+            <tr><td><strong>TikTok Shop NL</strong></td><td>Tab "Producten" → sorteer op bestsellers → noteer merk</td></tr>
+            <tr><td><strong>Bol.com</strong></td><td>Categorie → bestseller → zoek merk op TikTok</td></tr>
+            <tr><td><strong>Instagram</strong></td><td>Zoek niche + NL → kijk wie Reels post maar geen TikTok heeft</td></tr>
+            <tr><td><strong>Product Hunt</strong></td><td>Nieuwe DTC-producten die NL-markt betreden</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Score legenda</h2>
+      <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+        <span class="badge badge-hot">🔥 Hot — actieve ads, slechte hooks</span>
+        <span class="badge badge-warm">⚡ Warm — ads aanwezig, TikTok zwak</span>
+        <span class="badge badge-cold">🌱 Cold — interessant maar weinig ad-spend signalen</span>
+      </div>
+
+      <h2>Tracker</h2>
+      <div class="table-wrap">
+        <table id="tracker-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Merknaam</th>
+              <th>Niche</th>
+              <th>Score</th>
+              <th>Loom verstuurd</th>
+              <th>Status</th>
+              <th>Notitie</th>
+            </tr>
+          </thead>
+          <tbody id="tracker-body">
+          </tbody>
+        </table>
+      </div>
+      <button onclick="addTrackerRow()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--muted);padding:8px 16px;font-size:13px;cursor:pointer;margin-top:8px;">+ Rij toevoegen</button>
+
+      <hr class="divider">
+      <h2>Conversie-verwachting</h2>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num">1–2</div>
+          <div class="stat-label">reacties per week (10 Looms)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1–2w</div>
+          <div class="stat-label">van reactie naar pilot</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2–3w</div>
+          <div class="stat-label">van pilot naar retainer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════ BRIEF ════════════════════════════ -->
+    <div class="doc-section" id="section-brief">
+      <div class="page-header">
+        <div class="page-tag">📋 Klanten</div>
+        <h1 class="page-title">Onboarding Brief</h1>
+        <p class="page-desc">Stuur dit naar een nieuwe klant zodra ze ja zeggen. Vultijd: ~10 minuten.</p>
+      </div>
+
+      <div class="callout accent">
+        <div class="callout-icon">⚡</div>
+        <p>Na ontvangst: bevestig binnen 24 uur · Eerste concept-hoeken binnen 48 uur · Eerste batch gereed binnen 7 werkdagen</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🏢</div>
+          <div><div class="card-title">Vraag 1 — Jouw merk</div></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Merknaam</label>
+            <input type="text" placeholder="bv. Bloesem Skincare">
+          </div>
+          <div class="form-group">
+            <label>Contactpersoon</label>
+            <input type="text" placeholder="Voornaam + achternaam">
+          </div>
+          <div class="form-group">
+            <label>Website</label>
+            <input type="text" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label>TikTok-handle</label>
+            <input type="text" placeholder="@merknaam">
+          </div>
+          <div class="form-group">
+            <label>Instagram (optioneel)</label>
+            <input type="text" placeholder="@merknaam">
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" placeholder="naam@merk.nl">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">📦</div>
+          <div><div class="card-title">Vraag 2 — Je product</div></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group form-full">
+            <label>Beschrijf je product in 3 zinnen (zoals aan een vriend)</label>
+            <textarea placeholder="Wat doet het, hoe werkt het, waarom is het anders dan alternatieven?"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Product 1 — naam + prijs</label>
+            <input type="text" placeholder="bv. Niacinamide Serum — €24,95">
+          </div>
+          <div class="form-group">
+            <label>Product 2 — naam + prijs (optioneel)</label>
+            <input type="text" placeholder="bv. Moisturizer — €19,95">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🎯</div>
+          <div><div class="card-title">Vraag 3 — Jouw doelklant</div></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Leeftijd</label>
+            <input type="text" placeholder="bv. 24–34 jaar">
+          </div>
+          <div class="form-group">
+            <label>Geslacht</label>
+            <input type="text" placeholder="bv. Voornamelijk vrouw">
+          </div>
+          <div class="form-group">
+            <label>Grootste pijn / probleem</label>
+            <input type="text" placeholder="bv. Droge huid, geen energie">
+          </div>
+          <div class="form-group">
+            <label>Wat verlangen ze?</label>
+            <input type="text" placeholder="bv. Zelfvertrouwen, minder stress">
+          </div>
+          <div class="form-group form-full">
+            <label>Wat hebben ze al geprobeerd?</label>
+            <input type="text" placeholder="bv. Dure crèmes, supplementen van €60+">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">⭐</div>
+          <div><div class="card-title">Vraag 4 — Echte reviews</div><div class="card-subtitle">Minimaal 3. Wij gebruiken ALLEEN onderbouwde claims.</div></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group form-full">
+            <label>Review 1</label>
+            <textarea placeholder="Plak hier een echte review van een klant..."></textarea>
+          </div>
+          <div class="form-group form-full">
+            <label>Review 2</label>
+            <textarea placeholder="Plak hier een echte review van een klant..."></textarea>
+          </div>
+          <div class="form-group form-full">
+            <label>Review 3</label>
+            <textarea placeholder="Plak hier een echte review van een klant..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🎬</div>
+          <div><div class="card-title">Vraag 5 — Huidige content</div></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group form-full">
+            <label>Beste content-link (TikTok / reel)</label>
+            <input type="text" placeholder="https://...">
+          </div>
+          <div class="form-group form-full">
+            <label>Wat werkt erin?</label>
+            <textarea placeholder="Jouw observatie over waarom deze video goed presteert..."></textarea>
+          </div>
+          <div class="form-group form-full">
+            <label>Content die NIET werkte — wat ging mis?</label>
+            <textarea placeholder="Optioneel, maar waardevol..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🏆</div>
+          <div><div class="card-title">Vraag 6 — Doel komende 30 dagen</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:#ccc;">
+            <input type="checkbox" style="accent-color:var(--accent);width:16px;height:16px;"> Meer verkopen via TikTok organisch
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:#ccc;">
+            <input type="checkbox" style="accent-color:var(--accent);width:16px;height:16px;"> TikTok Shop NL lanceren
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:#ccc;">
+            <input type="checkbox" style="accent-color:var(--accent);width:16px;height:16px;"> Betere conversie op bestaande TikTok-ads
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:#ccc;">
+            <input type="checkbox" style="accent-color:var(--accent);width:16px;height:16px;"> Nieuwe doelgroep bereiken
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:#ccc;">
+            <input type="checkbox" style="accent-color:var(--accent);width:16px;height:16px;"> Meta-ads verbeteren met UGC-video's
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Meetbaar doel</label>
+          <input type="text" placeholder="bv. 100 bestellingen in juni, 2% conversieratio, 10K views per video">
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-icon">⚠️</div>
+        <p>Alle geleverde content is AI-gegenereerd en wordt gelabeld conform <strong>EU AI Act Art. 50 (AIGC)</strong>. Wij gebruiken uitsluitend onderbouwde claims op basis van aangeleverde reviews.</p>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════ REVIEW ════════════════════════════ -->
+    <div class="doc-section" id="section-review">
+      <div class="page-header">
+        <div class="page-tag">📈 Klanten</div>
+        <h1 class="page-title">Maandelijkse Performance Review</h1>
+        <p class="page-desc">Vul maandelijks in per klant. Stuur als PDF of deel als Google Doc.</p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Merknaam</label>
+          <input type="text" placeholder="bv. Bloesem Skincare">
+        </div>
+        <div class="form-group">
+          <label>Periode</label>
+          <input type="text" placeholder="bv. Juni 2026">
+        </div>
+        <div class="form-group">
+          <label>Pakket</label>
+          <select>
+            <option>Starter</option>
+            <option>Growth</option>
+            <option>Full Retainer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Datum rapport</label>
+          <input type="date">
+        </div>
+        <div class="form-group form-full">
+          <label>Samenvatting (2–3 zinnen over de maand)</label>
+          <textarea placeholder="bv. Juni was een sterke maand voor beauty-content op TikTok NL. De skin-routine video scoorde 3x beter dan het maandgemiddelde..."></textarea>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h2>Top 3 presterende hooks</h2>
+      <div class="callout">
+        <div class="callout-icon">📊</div>
+        <p>Klant levert de analytics (TikTok Analytics / Meta Ads Manager). Jij analyseert de patronen.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Hook</th><th>Platform</th><th>Views</th><th>CTR</th><th>Conversies</th><th>ROAS</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:100%;font-family:inherit;font-size:13px;outline:none;" placeholder="[hook tekst]"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:80px;font-family:inherit;font-size:13px;outline:none;" placeholder="TikTok"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:70px;font-family:inherit;font-size:13px;outline:none;" placeholder="12K"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:60px;font-family:inherit;font-size:13px;outline:none;" placeholder="3,2%"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:70px;font-family:inherit;font-size:13px;outline:none;" placeholder="47"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:60px;font-family:inherit;font-size:13px;outline:none;" placeholder="4,1x"></td>
+            </tr>
+            <tr>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:100%;font-family:inherit;font-size:13px;outline:none;" placeholder="[hook tekst]"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:80px;font-family:inherit;font-size:13px;outline:none;" placeholder="TikTok"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:70px;font-family:inherit;font-size:13px;outline:none;" placeholder="8K"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:60px;font-family:inherit;font-size:13px;outline:none;" placeholder="2,1%"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:70px;font-family:inherit;font-size:13px;outline:none;" placeholder="28"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:60px;font-family:inherit;font-size:13px;outline:none;" placeholder="2,8x"></td>
+            </tr>
+            <tr>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:100%;font-family:inherit;font-size:13px;outline:none;" placeholder="[hook tekst]"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:80px;font-family:inherit;font-size:13px;outline:none;" placeholder="Meta"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:70px;font-family:inherit;font-size:13px;outline:none;" placeholder="5K"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:60px;font-family:inherit;font-size:13px;outline:none;" placeholder="1,8%"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:70px;font-family:inherit;font-size:13px;outline:none;" placeholder="19"></td>
+              <td><input type="text" style="background:transparent;border:none;color:#ccc;width:60px;font-family:inherit;font-size:13px;outline:none;" placeholder="3,2x"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group form-full">
+          <label>Wat werkte deze maand (observaties)</label>
+          <textarea style="min-height:100px;" placeholder="bv. Opening met persoonlijk probleem (FOMO-trigger) zorgde voor hogere watch-time dan productdemo-opens..."></textarea>
+        </div>
+        <div class="form-group form-full">
+          <label>Wat we aanpassen volgende maand</label>
+          <textarea style="min-height:100px;" placeholder="bv. Hook B te vroeg gestopt met product reveal — volgende maand langer aanhouden..."></textarea>
+        </div>
+        <div class="form-group form-full">
+          <label>Aanbeveling volgende maand</label>
+          <textarea placeholder="Focus niche, volume, prioriteit..."></textarea>
+        </div>
+      </div>
+
+      <h2>Actiepunten</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Actie</th><th>Owner</th><th>Deadline</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Analytics afgelopen maand aanleveren</td>
+              <td style="color:var(--orange);">Klant</td>
+              <td><input type="date" style="background:transparent;border:none;color:#ccc;font-family:inherit;font-size:13px;outline:none;"></td>
+            </tr>
+            <tr>
+              <td>Brief voor volgende batch invullen</td>
+              <td style="color:var(--orange);">Klant</td>
+              <td><input type="date" style="background:transparent;border:none;color:#ccc;font-family:inherit;font-size:13px;outline:none;"></td>
+            </tr>
+            <tr>
+              <td>Nieuwe batch concept-approval</td>
+              <td style="color:var(--accent);">Ian</td>
+              <td><input type="date" style="background:transparent;border:none;color:#ccc;font-family:inherit;font-size:13px;outline:none;"></td>
+            </tr>
+            <tr>
+              <td>Video's batch 2 geleverd</td>
+              <td style="color:var(--accent);">Ian</td>
+              <td><input type="date" style="background:transparent;border:none;color:#ccc;font-family:inherit;font-size:13px;outline:none;"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════ WORKFLOW ════════════════════════════ -->
+    <div class="doc-section" id="section-workflow">
+      <div class="page-header">
+        <div class="page-tag">⚙️ Productie</div>
+        <h1 class="page-title">Content Productie Workflow</h1>
+        <p class="page-desc">4-fasen draaiboek per klantbatch. Inclusief copy-paste Claude-prompts.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num">7</div>
+          <div class="stat-label">werkdagen per batch</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5</div>
+          <div class="stat-label">video's per batch (basis)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">hoeken per klant</div>
+        </div>
+      </div>
+
+      <!-- Fase 1 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">📋</div>
+          <div>
+            <div class="card-title">Fase 1 — Onboarding & Briefing</div>
+            <div class="card-subtitle">Input nodig: ingevulde onboarding brief</div>
+          </div>
+        </div>
+
+        <h4>Stap 1.1 — Review brief</h4>
+        <ul class="checklist" id="fase1-checklist">
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> Product is visueel demonstreerbaar (zo nee: overleg met klant)</li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> Echte reviews aangeleverd (minimaal 3)</li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> Doelgroep specifiek genoeg (leeftijd + pijn + verlangen)</li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> Doel voor de komende 30 dagen is concreet</li>
+        </ul>
+
+        <h4 style="margin-top:16px;">Stap 1.2 — Extraheer uit reviews</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="callout" style="margin:0;">
+            <div class="callout-icon">✅</div>
+            <p><strong>Resultaatclaims</strong><br><span style="font-size:12px;">"na 2 weken was mijn huid..."</span></p>
+          </div>
+          <div class="callout" style="margin:0;">
+            <div class="callout-icon">😣</div>
+            <p><strong>Pijnpunten</strong><br><span style="font-size:12px;">Voor het product</span></p>
+          </div>
+          <div class="callout" style="margin:0;">
+            <div class="callout-icon">💫</div>
+            <p><strong>Verlangens</strong><br><span style="font-size:12px;">Wat klanten wilden bereiken</span></p>
+          </div>
+          <div class="callout" style="margin:0;">
+            <div class="callout-icon">💡</div>
+            <p><strong>Verrassingen</strong><br><span style="font-size:12px;">Voordelen die klant zelf niet noemde</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fase 2 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🧠</div>
+          <div>
+            <div class="card-title">Fase 2 — Strategie & Hoeken</div>
+            <div class="card-subtitle">Kopieer prompt → Claude → stuur 3 hoeken ter goedkeuring</div>
+          </div>
+        </div>
+
+        <h4>Angle Research Prompt (kopieer naar Claude)</h4>
+        <div class="copy-block" id="prompt-angle">Klant: [MERKNAAM]
+Product: [PRODUCTNAAM + 2-zin beschrijving]
+Doelgroep: [LEEFTIJD, GESLACHT, PIJN, VERLANGEN]
+Prijs: €[PRIJS]
+Reviews (echt, aangeleverd door klant):
+[PLAK REVIEWS]
+
+Taak:
+1. Vind 3 winnende UGC-hoeken op basis van bovenstaande data
+2. Schrijf 5 hook-varianten per hoek:
+   - "Ik was [X] jaar oud toen ik eindelijk begreep dat [CLAIM]"
+   - "Stop scrollend als je ooit [PIJN] hebt gehad"
+   - "POV: je hebt eindelijk [VERLANGEN] gevonden"
+   - "Dit product van €[PRIJS] verving mijn [DUUR ALTERNATIEF] van €[X]"
+   - "Hoe mijn [DOELGROEP] veranderde na 1 week [PRODUCT]"
+3. Identificeer het tegen-narratief: wat zegt de markt, wat zeggen wij ertegenin?
+4. Lever een shotlist per hoek (opening / actie / slot / tekst-overlay / audio)
+
+Regels:
+- ALLEEN claims die aantoonbaar zijn op basis van aangeleverde reviews
+- Geen nep-statistieken, geen verzonnen testimonials
+- Hooks moeten in de eerste 1.5 seconde werken op TikTok<button class="copy-btn" onclick="copyBlock('prompt-angle', this)">Kopieer</button></div>
+      </div>
+
+      <!-- Fase 3 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🧑‍🎨</div>
+          <div>
+            <div class="card-title">Fase 3 — AI-Persona Aanmaken</div>
+            <div class="card-subtitle">Eén consistente "Soul Character" per niche — herbruikbaar over batches</div>
+          </div>
+        </div>
+
+        <h4>Persona Prompt (kopieer naar Midjourney / Gemini)</h4>
+        <div class="copy-block" id="prompt-persona">Maak een consistente UGC-persona voor [NICHE]:
+
+Label: [bv. lisa_beauty_01]
+Leeftijd: [bv. 26]
+Look: [beschrijving — bv. lichte huid, donkerblond haar, casual stijl]
+Garderobe: neutrale tinten, geen logo's zichtbaar
+Setting: natuurlijk daglicht, neutrale achtergrond
+Expressies te genereren: verrast, bezorgd, tevreden, enthousiast
+
+Genereer 4 referentieshots:
+1. Selfie — camera, neutrale achtergrond
+2. Mid-shot met product in hand
+3. Side-profile tijdens gebruik
+4. Close-up gezicht (reactie-shot)
+
+Bewaar alle shots onder label [LABEL] voor hergebruik.
+
+BELANGRIJK (EU AI Act Art. 50):
+- Gebruik GEEN echte persoon als basis
+- Persona moet duidelijk synthetisch zijn indien nader bekeken
+- Alle video's worden gelabeld als AIGC bij upload<button class="copy-btn" onclick="copyBlock('prompt-persona', this)">Kopieer</button></div>
+      </div>
+
+      <!-- Fase 4 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">🎬</div>
+          <div>
+            <div class="card-title">Fase 4 — Video Batch Generatie</div>
+            <div class="card-subtitle">Higgsfield / Kling / Runway — 9:16 verticaal, 15–30 sec, iPhone-aesthetiek</div>
+          </div>
+        </div>
+
+        <h4>Batch Prompt (kopieer naar video-generator)</h4>
+        <div class="copy-block" id="prompt-batch">Genereer 5 UGC-video's voor [PRODUCTNAAM] met persona "[LABEL]".
+
+Specs: 9:16 verticaal, 15–30 seconden, UGC-preset, iPhone-aesthetiek
+
+VIDEO 1 — HOOK A:
+  Opening (0–1.5s): [persona reageert op probleem]
+  Actie (1.5–20s): [product pakken, uitleg, gebruik tonen]
+  Slot (20–30s): [resultaat / reactie / CTA]
+  Tekst-overlay: "[HOOK TEKST]"
+  Voice-over: "[EXACTE TEKST — alleen aantoonbare claims]"
+
+VIDEO 2 — HOOK B:
+  [idem — andere hoek]
+
+VIDEO 3 — HOOK C:
+  [idem — andere hoek]
+
+VIDEO 4 — VERGELIJKING:
+  Opening: [persona met oud product / probleem]
+  Actie: [overstap naar nieuw product]
+  Slot: [voor/na of reactie]
+  Tekst-overlay: "Voor vs. Na [X weken]"
+
+VIDEO 5 — TESTIMONIAL STIJL:
+  Opening: [persona kijkt direct in camera]
+  Actie: [persoonlijk verhaal, productgebruik]
+  Slot: [aanbeveling]
+
+Stijl: iPhone-aesthetiek · lichte camera-shake · imperfecte framing
+Licht: natuurlijk daglicht of warm binnen-licht
+Geen stockfoto-look, geen studio-belichting<button class="copy-btn" onclick="copyBlock('prompt-batch', this)">Kopieer</button></div>
+
+        <h4 style="margin-top:16px;">Review checklist na generatie</h4>
+        <ul class="checklist">
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> Alle claims controleren op basis van aangeleverde reviews</li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> Geen nep-resultaten, geen verzonnen aantallen</li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> AIGC-label zichtbaar of klaar voor TikTok AIGC-toggle</li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> Aspect ratio 9:16 correct</li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> Duurtijd binnen 15–30 seconden</li>
+        </ul>
+      </div>
+
+      <hr class="divider">
+
+      <h2>Tijdlijn per batch</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Dag</th><th>Actie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Dag 1</strong></td><td>Brief ontvangen en reviewen</td></tr>
+            <tr><td><strong>Dag 2</strong></td><td>Angle research + 3 hoeken sturen ter goedkeuring</td></tr>
+            <tr><td><strong>Dag 3</strong></td><td>Goedkeuring ontvangen, persona aanmaken of ophalen</td></tr>
+            <tr><td><strong>Dag 4–5</strong></td><td>Video's genereren</td></tr>
+            <tr><td><strong>Dag 6</strong></td><td>Review intern — claims checken</td></tr>
+            <tr><td><strong>Dag 7</strong></td><td>Levering aan klant (WeTransfer / Google Drive)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Tools per stap</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Stap</th><th>Tool</th></tr></thead>
+          <tbody>
+            <tr><td>Angle research & scripts</td><td>Claude (desktop)</td></tr>
+            <tr><td>Persona generatie</td><td>Midjourney / Gemini</td></tr>
+            <tr><td>Video generatie</td><td>Higgsfield / Kling / Runway</td></tr>
+            <tr><td>Opslag</td><td>Google Drive (map per klant)</td></tr>
+            <tr><td>Levering</td><td>WeTransfer / Drive-link</td></tr>
+            <tr><td>Facturatie</td><td>Moneybird / e-mail factuur</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.doc-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    el.textContent = el.classList.contains('checked') ? '✓' : '';
+  }
+
+  function copyBlock(id, btn) {
+    const block = document.getElementById(id);
+    const text = block.innerText.replace('Kopieer', '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Gekopieerd ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Kopieer'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function copyEmail(btn) {
+    const body = btn.closest('.email-card').querySelector('.email-body').innerText;
+    navigator.clipboard.writeText(body).then(() => {
+      btn.textContent = 'Gekopieerd ✓';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Kopieer'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  // ── Prospect Tracker ──
+  const statuses = ['Nieuw', 'Loom verstuurd', 'Gereageerd', 'Pilot gestart', 'Retainer', 'Nee'];
+  const niches = ['Beauty', 'Supplementen', 'Fashion', 'Home-gadget', 'Fitness'];
+  const scores = ['🔥 Hot', '⚡ Warm', '🌱 Cold'];
+
+  function addTrackerRow() {
+    const tbody = document.getElementById('tracker-body');
+    const rowNum = tbody.rows.length + 1;
+    const tr = document.createElement('tr');
+    tr.className = 'tracker-row';
+    tr.innerHTML = `
+      <td style="color:var(--muted);font-weight:600;">${rowNum}</td>
+      <td><input type="text" placeholder="Merknaam"></td>
+      <td><select>${niches.map(n => `<option>${n}</option>`).join('')}</select></td>
+      <td><select>${scores.map(s => `<option>${s}</option>`).join('')}</select></td>
+      <td><input type="date"></td>
+      <td><select>${statuses.map(s => `<option>${s}</option>`).join('')}</select></td>
+      <td><input type="text" placeholder="Notitie..."></td>
+    `;
+    tbody.appendChild(tr);
+  }
+
+  // Init with 10 rows
+  for (let i = 0; i < 10; i++) addTrackerRow();
+</script>
+</body>
+</html>
