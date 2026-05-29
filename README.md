@@ -1,8 +1,15 @@
 # AI UGC Studio
 
-Next.js 14 portfolio site voor AI UGC Studio — TikTok-native content voor e-commercemerken.
+TikTok-native AI UGC voor e-commercemerken. Deze repo bevat twee onderdelen:
 
-## Deployment (Vercel — 2 minuten)
+| Onderdeel | Map | Wat |
+|-----------|-----|-----|
+| **Portfolio-site** | `/` (`app/`, `components/`) | Next.js 14 marketing-site (zie hieronder) |
+| **Studio Operating System** | [`studio/`](studio/) | Operationeel systeem om per klant van brief → strategie → scripts → batch → oplevering te gaan, getuned op het 2%-venster van TikTok Shop NL. Zie [`studio/README.md`](studio/README.md). |
+
+## Portfolio-site
+
+### Deployment (Vercel — 2 minuten)
 
 ### Optie A: Via Vercel dashboard (aanbevolen)
 1. Ga naar [vercel.com/new](https://vercel.com/new)
